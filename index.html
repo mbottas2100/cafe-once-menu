@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Once - Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;500;600&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #f8f6f2;
+            color: #2c2c2c;
+            line-height: 1.5;
+        }
+        .menu-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #fff;
+        }
+        .header {
+            background: linear-gradient(135deg, #4a3728 0%, #5d4632 100%);
+            color: #fff;
+            text-align: center;
+            padding: 25px 20px 20px;
+        }
+        .header .logo {
+            max-width: 280px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .header .location {
+            font-family: 'Dancing Script', cursive;
+            font-size: 14px;
+            opacity: 0.95;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        .menu-content { padding: 20px; }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #4a3728;
+            border-bottom: 2px solid #e8a54b;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-note {
+            font-size: 11px;
+            color: #888;
+            font-style: italic;
+            margin-top: -10px;
+            margin-bottom: 15px;
+        }
+        
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 10px 0;
+            border-bottom: 1px dotted #e5e5e5;
+        }
+        .item:last-child { border-bottom: none; }
+        .item-info { flex: 1; padding-right: 10px; }
+        .item-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #2c2c2c;
+        }
+        .item-name .fav {
+            color: #e8a54b;
+            font-size: 12px;
+        }
+        .item-description {
+            font-size: 11px;
+            color: #888;
+            margin-top: 2px;
+        }
+        .item-price {
+            font-weight: 700;
+            color: #4a3728;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        /* Combo Box */
+        .combo-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .combo {
+            background: linear-gradient(135deg, #f8f6f2 0%, #fff 100%);
+            border: 2px solid #e8a54b;
+            border-radius: 10px;
+            padding: 15px 25px;
+            text-align: center;
+        }
+        .combo-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: #4a3728;
+        }
+        .combo-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #e8a54b;
+        }
+        
+        /* Special Box */
+        .special-box {
+            background: linear-gradient(135deg, #4a3728 0%, #5d4632 100%);
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 25px 0;
+        }
+        .special-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .special-box .price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #e8a54b;
+        }
+        .special-box p {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+        
+        /* Price Grid for Coffee */
+        .price-header {
+            display: grid;
+            grid-template-columns: 1fr 50px 50px 50px;
+            gap: 5px;
+            padding: 8px 0;
+            font-size: 11px;
+            font-weight: 600;
+            color: #4a3728;
+            border-bottom: 1px solid #e8a54b;
+            margin-bottom: 5px;
+        }
+        .price-header span:not(:first-child) {
+            text-align: center;
+        }
+        .price-row {
+            display: grid;
+            grid-template-columns: 1fr 50px 50px 50px;
+            gap: 5px;
+            padding: 8px 0;
+            border-bottom: 1px dotted #e5e5e5;
+            font-size: 13px;
+        }
+        .price-row span:not(:first-child) {
+            text-align: center;
+            font-weight: 600;
+            color: #4a3728;
+        }
+        .price-row .name { font-weight: 500; }
+        
+        /* Two sizes */
+        .price-header-2 {
+            display: grid;
+            grid-template-columns: 1fr 60px 60px;
+            gap: 5px;
+            padding: 8px 0;
+            font-size: 11px;
+            font-weight: 600;
+            color: #4a3728;
+            border-bottom: 1px solid #e8a54b;
+            margin-bottom: 5px;
+        }
+        .price-header-2 span:not(:first-child) { text-align: center; }
+        .price-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 60px 60px;
+            gap: 5px;
+            padding: 8px 0;
+            border-bottom: 1px dotted #e5e5e5;
+            font-size: 13px;
+        }
+        .price-row-2 span:not(:first-child) {
+            text-align: center;
+            font-weight: 600;
+            color: #4a3728;
+        }
+        
+        /* All same price */
+        .same-price-note {
+            background: #f8f6f2;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #4a3728;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #e8a54b, transparent);
+        }
+        .divider span {
+            padding: 0 12px;
+            color: #e8a54b;
+            font-size: 16px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 25px;
+            background: #4a3728;
+            color: #fff;
+            font-size: 12px;
+        }
+        .footer p { opacity: 0.8; }
+        
+        /* Section Divider */
+        .section-divider {
+            background: linear-gradient(135deg, #e8a54b 0%, #d4943f 100%);
+            color: #fff;
+            text-align: center;
+            padding: 12px;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            margin: 30px -20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <div class="header">
+            <img src="logo.png" alt="Café Once" class="logo">
+            <div class="location">📍 2100 Ponce de Leon Blvd. Suite 102, Coral Gables, FL 33134</div>
+        </div>
+
+        <div class="menu-content">
+        
+            <!-- FOOD SECTION -->
+            <div class="section-divider">🍽️ FOOD</div>
+
+            <!-- BREAKFAST COMBOS -->
+            <div class="section">
+                <h2 class="section-title">☀️ Breakfast Combos</h2>
+                <div class="combo-row">
+                    <div class="combo">
+                        <div class="combo-name">Combo 1</div>
+                        <div class="combo-price">$9.35</div>
+                    </div>
+                    <div class="combo">
+                        <div class="combo-name">Combo 2</div>
+                        <div class="combo-price">$9.75</div>
+                    </div>
+                    <div class="combo">
+                        <div class="combo-name">Combo 3</div>
+                        <div class="combo-price">$10.25</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BREAKFAST ALL DAY -->
+            <div class="section">
+                <h2 class="section-title">🍳 Breakfast All Day</h2>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Greek Yogurt (16oz)</div>
+                        <div class="item-description">granola, strawberry, blueberry, banana & honey</div>
+                    </div>
+                    <div class="item-price">$8.15</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Eggs Your Style</div>
+                        <div class="item-description">fried, scrambled, omelette or boiled + ham, cheese & bread</div>
+                    </div>
+                    <div class="item-price">$9.45</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Salmon Bagel</div>
+                        <div class="item-description">cream cheese, onions & capers</div>
+                    </div>
+                    <div class="item-price">$9.45</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Açaí Bowl <span class="fav">★</span></div>
+                        <div class="item-description">granola, coconut flakes, honey, strawberry, banana, blueberry & almond</div>
+                    </div>
+                    <div class="item-price">$12.45</div>
+                </div>
+            </div>
+
+            <!-- CROISSANTS -->
+            <div class="section">
+                <h2 class="section-title">🥐 Croissants</h2>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Butter</div></div>
+                    <div class="item-price">$3.70</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Cream Cheese</div></div>
+                    <div class="item-price">$4.00</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Ham & Cheese</div></div>
+                    <div class="item-price">$7.45</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Breakfast Croissant</div>
+                        <div class="item-description">eggs, bacon, ham & cheese</div>
+                    </div>
+                    <div class="item-price">$9.50</div>
+                </div>
+            </div>
+
+            <!-- TOASTS -->
+            <div class="section">
+                <h2 class="section-title">🍞 Toasts</h2>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Butter / Cream Cheese / Jelly</div></div>
+                    <div class="item-price">$3.15</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">2 Eggs Any Style</div>
+                        <div class="item-description">shredded cheese & tomato</div>
+                    </div>
+                    <div class="item-price">$7.45</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Avocado <span class="fav">★</span></div>
+                        <div class="item-description">lettuce, tomato & balsamic</div>
+                    </div>
+                    <div class="item-price">$8.15</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Tuna</div>
+                        <div class="item-description">mayo, lettuce & tomato</div>
+                    </div>
+                    <div class="item-price">$8.45</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Special Toast</div>
+                        <div class="item-description">avocado, lettuce, prosciutto, tomato & shredded cheese</div>
+                    </div>
+                    <div class="item-price">$9.50</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Salmon</div>
+                        <div class="item-description">cream cheese, lettuce & tomato</div>
+                    </div>
+                    <div class="item-price">$9.75</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Special Avocado</div>
+                        <div class="item-description">feta cheese, mashed avocado & whole salad portion</div>
+                    </div>
+                    <div class="item-price">$12.00</div>
+                </div>
+            </div>
+
+            <div class="divider"><span>✦</span></div>
+
+            <!-- SANDWICHES -->
+            <div class="section">
+                <h2 class="section-title">🥖 Sandwiches</h2>
+                <p class="section-note">Served on freshly baked baguette bread</p>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Ham</div>
+                        <div class="item-description">cheese, lettuce & tomato</div>
+                    </div>
+                    <div class="item-price">$10.25</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Tuna</div>
+                        <div class="item-description">avocado, lettuce, tomato & cheese</div>
+                    </div>
+                    <div class="item-price">$10.95</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Caprese</div>
+                        <div class="item-description">mozzarella, arugula, tomato & basil pesto</div>
+                    </div>
+                    <div class="item-price">$11.75</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Morning Meal <span class="fav">★</span></div>
+                        <div class="item-description">eggs, bacon, american cheese, avocado, lettuce, tomato & mayo</div>
+                    </div>
+                    <div class="item-price">$11.85</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Dutch Oven Pork Roast</div>
+                        <div class="item-description">ham, cheese, lettuce, tomato & pickles</div>
+                    </div>
+                    <div class="item-price">$12.00</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Turkey</div>
+                        <div class="item-description">swiss cheese, lettuce, tomato, onion & honey mustard</div>
+                    </div>
+                    <div class="item-price">$12.25</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Chicken</div>
+                        <div class="item-description">american cheese, tomato, lettuce, avocado & mayo</div>
+                    </div>
+                    <div class="item-price">$12.25</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Prosciutto</div>
+                        <div class="item-description">arugula, provolone cheese & balsamic vinaigrette</div>
+                    </div>
+                    <div class="item-price">$12.45</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Italiano <span class="fav">★</span></div>
+                        <div class="item-description">spanish chorizo, prosciutto, provolone, arugula & olive oil</div>
+                    </div>
+                    <div class="item-price">$12.65</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Salmon</div>
+                        <div class="item-description">smoked salmon, cream cheese, red onions & capers</div>
+                    </div>
+                    <div class="item-price">$12.75</div>
+                </div>
+            </div>
+
+            <!-- AREPAS -->
+            <div class="section">
+                <h2 class="section-title">🫓 Arepas</h2>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Traditional</div>
+                        <div class="item-description">ham & cheese</div>
+                    </div>
+                    <div class="item-price">$7.75</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Tuna</div>
+                        <div class="item-description">mozzarella cheese & tuna</div>
+                    </div>
+                    <div class="item-price">$8.55</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Reina Pepiada <span class="fav">★</span></div>
+                        <div class="item-description">chicken, avocado, onions & cilantro</div>
+                    </div>
+                    <div class="item-price">$9.45</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Peluda</div>
+                        <div class="item-description">shredded beef & cheese</div>
+                    </div>
+                    <div class="item-price">$9.65</div>
+                </div>
+            </div>
+
+            <!-- TEQUEÑOS -->
+            <div class="section">
+                <h2 class="section-title">🧀 Tequeños</h2>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">4 pieces</div></div>
+                    <div class="item-price">$5.55</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">6 pieces</div></div>
+                    <div class="item-price">$8.25</div>
+                </div>
+            </div>
+
+            <!-- WRAPS -->
+            <div class="section">
+                <h2 class="section-title">🌯 Wraps</h2>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Breakfast</div>
+                        <div class="item-description">eggs, bacon, cheese, tomato & spinach</div>
+                    </div>
+                    <div class="item-price">$12.65</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Tuna</div>
+                        <div class="item-description">lettuce, tomato, avocado & cheese</div>
+                    </div>
+                    <div class="item-price">$12.95</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Chicken Caesar <span class="fav">★</span></div>
+                        <div class="item-description">lettuce, caesar dressing & parmesan cheese</div>
+                    </div>
+                    <div class="item-price">$12.95</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Chicken Avocado</div>
+                        <div class="item-description">cream cheese, avocado, lettuce, cheese & chicken</div>
+                    </div>
+                    <div class="item-price">$12.95</div>
+                </div>
+            </div>
+
+            <div class="divider"><span>✦</span></div>
+
+            <!-- BOWLS -->
+            <div class="section">
+                <h2 class="section-title">🍚 Bowls</h2>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Chicken</div>
+                        <div class="item-description">rice, chicken, mixed greens, tomato, corn, arugula & carrot</div>
+                    </div>
+                    <div class="item-price">$13.45</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Tuna</div>
+                        <div class="item-description">rice, lettuce, tomato, carrots, avocado & cucumbers</div>
+                    </div>
+                    <div class="item-price">$13.45</div>
+                </div>
+            </div>
+
+            <!-- SALADS -->
+            <div class="section">
+                <h2 class="section-title">🥗 Salads</h2>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Caesar Chicken <span class="fav">★</span></div>
+                        <div class="item-description">grilled chicken, croutons, lettuce, parmesan & caesar dressing</div>
+                    </div>
+                    <div class="item-price">$13.15</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Tuna</div>
+                        <div class="item-description">lettuce, tomato, cucumbers, carrots & tuna</div>
+                    </div>
+                    <div class="item-price">$13.15</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Salmon</div>
+                        <div class="item-description">smoked salmon, mixed greens, avocado, cucumber, cream cheese pearl, onion & capers</div>
+                    </div>
+                    <div class="item-price">$14.35</div>
+                </div>
+            </div>
+
+            <!-- LUNCH SPECIAL -->
+            <div class="special-box">
+                <h3>🌟 LUNCH SPECIAL</h3>
+                <div class="price">$15.00</div>
+                <p>Soup of the Day + Sandwich or Half Salad</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🍲 Soups & Combos</h2>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Soup of the Day (16oz)</div></div>
+                    <div class="item-price">$7.45</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Sandwich + Soup</div>
+                        <div class="item-description">petit baguette bread</div>
+                    </div>
+                    <div class="item-price">$12.95</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Half Salad + Soup</div></div>
+                    <div class="item-price">$12.95</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Sandwich + Half Salad</div></div>
+                    <div class="item-price">$12.95</div>
+                </div>
+            </div>
+
+            <!-- DRINKS SECTION -->
+            <div class="section-divider">☕ DRINKS</div>
+
+            <!-- JUICES -->
+            <div class="section">
+                <h2 class="section-title">🍊 Juices</h2>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Fresh Orange Juice (12oz)</div></div>
+                    <div class="item-price">$6.00</div>
+                </div>
+            </div>
+
+            <!-- POWER JUICES -->
+            <div class="section">
+                <h2 class="section-title">💚 Power Juices (16oz)</h2>
+                <div class="same-price-note">All Power Juices — $7.25</div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Detox</div>
+                        <div class="item-description">spinach, green apple, celery, cucumber & ginger</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Green</div>
+                        <div class="item-description">cucumber, kale, apple & celery</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Veggie</div>
+                        <div class="item-description">spinach, kale, celery & carrots</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Refresh</div>
+                        <div class="item-description">pineapple, mango & apple</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span>✦</span></div>
+
+            <!-- SMOOTHIES 12oz -->
+            <div class="section">
+                <h2 class="section-title">🍓 Smoothies (12oz)</h2>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Mamey / Mango / Guava</div></div>
+                    <div class="item-price">$5.75</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Banana + Strawberry</div></div>
+                    <div class="item-price">$6.55</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Three Berry Blend + Banana</div></div>
+                    <div class="item-price">$6.55</div>
+                </div>
+            </div>
+
+            <!-- SMOOTHIES 16oz -->
+            <div class="section">
+                <h2 class="section-title">🍹 Smoothies (16oz)</h2>
+                <div class="same-price-note">All 16oz Smoothies — $7.95</div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Caribbean</div>
+                        <div class="item-description">pineapple, blueberry, strawberry & honey</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Divine</div>
+                        <div class="item-description">strawberry, banana, spinach, mango & orange</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Acai <span class="fav">★</span></div>
+                        <div class="item-description">banana, strawberry, blueberry, acai & honey</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Aloha</div>
+                        <div class="item-description">mango, pineapple, banana & honey</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POWER SHAKES -->
+            <div class="section">
+                <h2 class="section-title">💪 Power Shakes (16oz)</h2>
+                <div class="same-price-note">All Power Shakes — $8.45</div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Peanut Butter <span class="fav">★</span></div>
+                        <div class="item-description">peanut butter, banana, milk & vanilla protein</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Pink</div>
+                        <div class="item-description">strawberry, banana, milk & vanilla protein</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Green Detox</div>
+                        <div class="item-description">spinach, banana, celery, almond milk, cinnamon, honey & vanilla protein</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Forest Fruit</div>
+                        <div class="item-description">three berry blend, milk, banana & vanilla protein</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span>✦</span></div>
+
+            <!-- ESPRESSO -->
+            <div class="section">
+                <h2 class="section-title">☕ Espresso</h2>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Espresso</div></div>
+                    <div class="item-price">$2.25</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Espresso Macchiato</div></div>
+                    <div class="item-price">$2.55</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Colada</div></div>
+                    <div class="item-price">$2.75</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Cortado</div></div>
+                    <div class="item-price">$2.75</div>
+                </div>
+            </div>
+
+            <!-- HOT COFFEE -->
+            <div class="section">
+                <h2 class="section-title">☕ Hot Coffee & Tea</h2>
+                <div class="price-header">
+                    <span></span>
+                    <span>8oz</span>
+                    <span>12oz</span>
+                    <span>16oz</span>
+                </div>
+                <div class="price-row">
+                    <span class="name">Americano</span>
+                    <span>$2.75</span>
+                    <span>$3.75</span>
+                    <span>$4.55</span>
+                </div>
+                <div class="price-row">
+                    <span class="name">Cappuccino</span>
+                    <span>$3.50</span>
+                    <span>$4.50</span>
+                    <span>$5.25</span>
+                </div>
+                <div class="price-row">
+                    <span class="name">Latte <span class="fav">★</span></span>
+                    <span>$3.55</span>
+                    <span>$4.55</span>
+                    <span>$5.35</span>
+                </div>
+                <div class="price-row">
+                    <span class="name">Café Mocha</span>
+                    <span>$3.75</span>
+                    <span>$4.45</span>
+                    <span>$5.45</span>
+                </div>
+                <div class="price-row">
+                    <span class="name">Hot Chocolate</span>
+                    <span>$3.85</span>
+                    <span>$4.25</span>
+                    <span>$5.25</span>
+                </div>
+                <div class="price-row">
+                    <span class="name">Hot Tea</span>
+                    <span>—</span>
+                    <span>$3.50</span>
+                    <span>$4.25</span>
+                </div>
+                <div class="price-row">
+                    <span class="name">Chai Latte</span>
+                    <span>$3.75</span>
+                    <span>$4.75</span>
+                    <span>$5.50</span>
+                </div>
+                <div class="price-row">
+                    <span class="name">Matcha Latte</span>
+                    <span>$3.75</span>
+                    <span>$4.75</span>
+                    <span>$5.50</span>
+                </div>
+            </div>
+
+            <!-- ICED COFFEE -->
+            <div class="section">
+                <h2 class="section-title">🧊 Iced Coffee & Tea</h2>
+                <div class="price-header-2">
+                    <span></span>
+                    <span>16oz</span>
+                    <span>24oz</span>
+                </div>
+                <div class="price-row-2">
+                    <span class="name">Iced Coffee</span>
+                    <span>$4.55</span>
+                    <span>$5.55</span>
+                </div>
+                <div class="price-row-2">
+                    <span class="name">Iced Latte <span class="fav">★</span></span>
+                    <span>$4.75</span>
+                    <span>$5.75</span>
+                </div>
+                <div class="price-row-2">
+                    <span class="name">Iced Chocolate</span>
+                    <span>$5.25</span>
+                    <span>$5.95</span>
+                </div>
+                <div class="price-row-2">
+                    <span class="name">Iced Matcha Latte</span>
+                    <span>$4.75</span>
+                    <span>$5.75</span>
+                </div>
+                <div class="price-row-2">
+                    <span class="name">Iced Chai Latte</span>
+                    <span>$4.75</span>
+                    <span>$5.75</span>
+                </div>
+            </div>
+
+            <!-- EXTRAS -->
+            <div class="section">
+                <h2 class="section-title">➕ Extras</h2>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Extra Espresso Shot</div></div>
+                    <div class="item-price">$1.50</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><div class="item-name">Substitute Milk</div></div>
+                    <div class="item-price">$0.75</div>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Flavors</div>
+                        <div class="item-description">vanilla, caramel & hazelnut</div>
+                    </div>
+                    <div class="item-price">$0.50</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <p>☕ CAFÉ ONCE</p>
+            <p style="font-family: 'Dancing Script', cursive; font-size: 14px;">2100 Ponce de Leon Blvd. Suite 102, Coral Gables, FL 33134</p>
+            <p style="margin-top: 10px; font-size: 10px;">★ Customer Favorites</p>
+        </div>
+    </div>
+</body>
+</html>
